@@ -58,8 +58,8 @@ loader.load('mochi.glb', (gltf) => {
 let target = 0;
 let current = 0;
 
-window.addEventListener("mousedown", () => target = 1);
-window.addEventListener("mouseup", () => target = 0);
+window.addEventListener("pointerdown", () => target = 1);
+window.addEventListener("pointerup", () => target = 0);
 
 // アニメーション
 function animate() {
