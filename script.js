@@ -79,13 +79,3 @@ function animate() {
 }
 
 animate();
-
-// 既存のコードが上にあってもOK
-
-const button = document.getElementById("btn");
-
-button.addEventListener("pointerdown", handleClick);
-
-function handleClick() {
-  console.log("clicked!");
-}
