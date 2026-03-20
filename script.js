@@ -11,18 +11,20 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   1000
 );
-camera.position.z = 5;
 
-camera.position.set(0, 10, -15
-);
-camera.lookAt(0, -5, -5
-);
+camera.position.set(0, 10, -15);
+camera.lookAt(0, -5, -5);
 
 // レンダラー
 const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
 renderer.setPixelRatio(window.devicePixelRatio);
+document.body.appendChild(renderer.domElement);
+
+// CSS（重要）
+document.body.style.margin = "0";
+document.body.style.overflow = "hidden";
+document.body.style.touchAction = "none";
 
 // ライト
 const light = new THREE.DirectionalLight(0xffffff, 1);
@@ -43,7 +45,6 @@ scene.add(backLight);
 
 scene.add(new THREE.AmbientLight(0xffffff, 0.5));
 
-
 // モデル
 const loader = new GLTFLoader();
 let mochi;
@@ -58,8 +59,20 @@ loader.load('mochi.glb', (gltf) => {
 let target = 0;
 let current = 0;
 
-window.addEventListener("pointerdown", () => target = 1);
-window.addEventListener("pointerup", () => target = 0);
+// ✅ canvasにイベントを付ける
+const canvas = renderer.domElement;
+
+canvas.addEventListener("pointerdown", () => {
+  target = 1;
+});
+
+canvas.addEventListener("pointerup", () => {
+  target = 0;
+});
+
+canvas.addEventListener("pointerleave", () => {
+  target = 0;
+});
 
 // アニメーション
 function animate() {
